@@ -9,11 +9,12 @@
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-2xl">
                     <section>
-                        <form method="post" action="{{ route('artikel.store') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('artikel.update',$artikel->id) }}" class="mt-6 space-y-6" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <header>
                                     <h2 class="text-lg font-medium text-gray-900">
-                                        Masukan Data Nama Kategori
+                                        Masukan Data Artikel
                                     </h2>
 
                                     <p class="mt-1 text-sm text-gray-600">
@@ -22,12 +23,12 @@
                             </header>
                                 <div>
                                     <x-input-label for="judul_artikel" value="Judul Artikel" />
-                                    <x-text-input id="judul_artikel" name="judul_artikel"  type="text" class="mt-1 block w-full" required />
+                                    <x-text-input id="judul_artikel" name="judul_artikel"  type="text" class="mt-1 block w-full" :value="old('judul_artikel', $artikel->judul_artikel)"  />
                                 </div>
                                 <div>
-                                    <x-input-label for="body " value="Body" />
-                                    <trix-editor input="x" class="border-gray-300 focus:border-indigo-500 rounded-md shadow-sm min-h-80"></trix-editor>
-                                </div>
+
+                                <x-textarea-trix value="{!! old('body' ,$artikel->body) !!}" id="x" name="body"></x-textarea-trix>
+                                 </div>
                                 <div>
                                     <x-input-label for="kategori" value="Kategori" />
                                         <select type="text" name="kategori" class="mt-1 block w-full border border-gray-300 rounded-md" required>
@@ -38,17 +39,17 @@
                                 </div>
                                 <div>
                                     <x-input-label for="gambar_artikel" value="Gambar Thumbnil" />
-                                    <input type="file" id="gambar_artikel" name="gambar_artikel" class="mt-1 w-full border border-gray-300 rounded-md" required />
+                                    <input type="file" id="gambar_artikel" name="gambar_artikel" class="mt-1 w-full border border-gray-300 rounded-md" />
                                 </div>
                                 <div>
                                     <x-input-label for="status" value="Status" />
-                                        <select type="text" name="status" class="mt-1 w-full border border-gray-300 rounded-md" id="text">
-                                            <option value="publish">publish</option>
-                                            <option value="Draft">Draft</option>
-                                        </select>
+                                        <x-select name="status">
+                                            <option value="draft"{{ (old('status',$artikel->status)=='draft')?'selected':'' }}>draft</option>
+                                            <option value="publish"{{ (old('status',$artikel->status)=='publish')?'selected':'' }}>publish</option>
+                                        </x-select>
                                 </div>
                                 <div class="flex items-center gap-4">
-                                <a href="{{ route('kategori.index') }}">
+                                <a href="{{ route('artikel.index') }}">
                                     <x-secondary-button>Kembali</x-secondary-button>
                                 </a>
                                 <x-primary-button>Simpan</x-primary-button>

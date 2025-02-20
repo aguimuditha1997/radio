@@ -21,28 +21,38 @@
                                 <td class="border px-6 py-4">Judul</td>
                                 <td class="border px-6 py-4 lg:w-[250px] hidden lg:table-cell">Tanggal</td>
                                 <td class="border px-6 py-4 lg:w-[100px] hidden lg:table-cell">Status</td>
+                                <td class="border px-6 py-4 lg:w-[100px] hidden lg:table-cell">Kategori</td>
                                 <td class="border px-6 py-4 lg:w-[250px] w-[100px]">Aksi</td>
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($artikel as $row )
                             <tr>
                                 <td class="border px-6 py-4 text-center">1</td>
                                 <td class="border px-6 py-4">
-                                    Selamat Datang di Tutorial Laravel
+                                    {{ $row->judul_artikel  }}
                                     <div class="block lg:hidden text-sm text-gray-500">
                                         draft | Kamis, 29 Agustus 2024
                                     </div>
                                 </td>
-                                <td class="border px-6 py-4 text-center text-gray-500 text-sm hidden lg:table-cell">Kamis, 29 Agustus 2024</td>
-                                <td class="border px-6 py-4 text-center text-sm hidden lg:table-cell">draft</td>
+                                <td class="border px-6 py-4 text-center text-gray-500 text-sm hidden lg:table-cell">{{ $row->created_at }}</td>
+                                <td class="border px-6 py-4 text-center text-sm hidden lg:table-cell">
+                                  {{ $row->status }}
+                                </td>
+                                <td class="border px-6 py-4 text-center text-gray-500 text-sm hidden lg:table-cell">{{ $row->kategori->nama_kategori }}</td>
                                 <td class="border px-6 py-4 text-center">
-                                    <a href='' class="text-blue-600 hover:text-blue-400 px-2">edit</a>
+                                    <a href='{{ route('artikel.edit',$row->id) }}' class="text-blue-600 hover:text-blue-400 px-2">edit</a>
                                     <a href='' class="text-blue-600 hover:text-blue-400 px-2">lihat</a>
                                     <button type=' submit' class='text-red-600 hover:text-red-400 px-2'>
                                         hapus
                                     </button>
                                 </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td colspan="6" class="text-center">Data Masih Kosong</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

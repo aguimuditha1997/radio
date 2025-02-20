@@ -12,7 +12,8 @@ class ArtikelController extends Controller
 {
     public function index()
     {
-        return view('back.artikel.index');
+        $artikel = Artikel::all();
+        return view('back.artikel.index', compact('artikel'));
     }
 
     public function create()
@@ -43,6 +44,51 @@ class ArtikelController extends Controller
 
         return redirect()->route('artikel.index')->with(['success'=>'Data Berhasil Tersimpan']);
     }
-    
+
+    public function edit(string $id)
+    {
+        $artikel = Artikel::find($id);
+        $kategori = Kategori::all();
+        return view('back.artikel.edit', compact('artikel','kategori'));
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $request->validate(
+            [
+                'judul_artikel'=>'required',
+                'body'=>'required',
+                'gambar_artikel'=>'image|mimes:jpeg,jpg,png|max:10240'
+            ],
+            [
+                'judul_artikel.required'=>'judul wajib diisi',
+                'body.required'=>'body wajib diisi',
+                'gambar_artikel.image'=>'hanya gambar yang di perbolehkan',
+                'gambar_artikel.mimes'=>'Ekstensi yang di perbolehkan hanya JPEG, JPG, dan PNG',
+                'gambar_artikel.max'=>'ukuran maksimum untuk gambar adalah 10MB',
+
+            ]
+
+        );
+
+        $artikel = Artikel::findOrFail($id);
+
+        $data=[
+            'judul_artikel'=>$request->judul_artikel,
+            'body'=>$request->body,
+            'nama_kategori'=>$request->nama_kategori,
+            'status'=>$request->status,
+            'user_id' => Auth::id(),
+        ];
+
+        dd($data);
+
+
+        $artikel->update($data);
+
+
+        return redirect()->route('artikel.index')->with('success', 'Data Berhasil Disimpan');
+    }
+
 
 }

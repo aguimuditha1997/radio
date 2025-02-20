@@ -24,7 +24,7 @@
                             </header>
                             <div>
                                 <x-input-label for="name" value="Nama Kategori" />
-                                <x-text-input id="name" name="nama_kategori" value="{{ $kategori->nama_kategori }}" type="text" class="mt-1 block w-full"
+                                <x-text-input id="name" name="nama_kategori" :value="old('nama_kategori', $kategori->nama_kategori)" type="text" class="mt-1 block w-full"
                                     required />
                             </div>
 
