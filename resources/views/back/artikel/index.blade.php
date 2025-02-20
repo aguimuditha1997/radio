@@ -11,44 +11,38 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <table class="w-full whitespace-no-wrapw-full whitespace-no-wrap table-fixed">
                             <div class="flex items-center gap-4 mb-4 justify-end">
-                                <a href="{{ route('kategori.create') }}">
-                                    <x-secondary-button>Tambahkan Kategori</x-secondary-button>
+                                <a href="{{ route('artikel.create') }}">
+                                    <x-secondary-button>Tambahkan Artikel</x-secondary-button>
                                 </a>
                             </div>
                         <thead>
                             <tr class="text-center font-bold">
                                 <td class="border px-6 py-4 w-[80px]">No</td>
-                                <td class="border px-6 py-4">Nama Kategory</td>
+                                <td class="border px-6 py-4">Judul</td>
                                 <td class="border px-6 py-4 lg:w-[250px] hidden lg:table-cell">Tanggal</td>
+                                <td class="border px-6 py-4 lg:w-[100px] hidden lg:table-cell">Status</td>
                                 <td class="border px-6 py-4 lg:w-[250px] w-[100px]">Aksi</td>
                             </tr>
                         </thead>
                         <tbody>
-                        @forelse($kategori as $row )
                             <tr>
                                 <td class="border px-6 py-4 text-center">1</td>
                                 <td class="border px-6 py-4">
-                                    {{ $row->nama_kategori }}
+                                    Selamat Datang di Tutorial Laravel
                                     <div class="block lg:hidden text-sm text-gray-500">
-                                       {{ $row->created_at }}
+                                        draft | Kamis, 29 Agustus 2024
                                     </div>
                                 </td>
-                                <td class="border px-6 py-4 text-center text-gray-500 text-sm hidden lg:table-cell">{{$row->created_at}}</td>
+                                <td class="border px-6 py-4 text-center text-gray-500 text-sm hidden lg:table-cell">Kamis, 29 Agustus 2024</td>
+                                <td class="border px-6 py-4 text-center text-sm hidden lg:table-cell">draft</td>
                                 <td class="border px-6 py-4 text-center">
-                                    <a href='{{ route('kategori.edit',$row->id) }}' class="text-blue-600 hover:text-blue-400 px-2">edit</a>
-
-                                    <form action="{{ route('kategori.destroy', $row->id) }}" method="POST" style="display:inline; " class="text-red-600 hover:text-red-400 px-2">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">Hapus</button>
-                                    </form>
+                                    <a href='' class="text-blue-600 hover:text-blue-400 px-2">edit</a>
+                                    <a href='' class="text-blue-600 hover:text-blue-400 px-2">lihat</a>
+                                    <button type=' submit' class='text-red-600 hover:text-red-400 px-2'>
+                                        hapus
+                                    </button>
                                 </td>
                             </tr>
-                            @empty
-                            <tr>
-                                <td>Data Masih Kosong</td>
-                            </tr>
-                            @endforelse
                         </tbody>
                     </table>
                 </div>

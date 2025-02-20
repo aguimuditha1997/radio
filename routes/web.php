@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::get('kategori/create' , [KategoriController::class,'create'])->name('kategori.create');
     Route::get('kategori/{kategori}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
     Route::put('kategori/{kategori}', [KategoriController::class, 'update'])->name('kategori.update');
+    Route::delete('/kategori/{kategori}', [KategoriController::class, 'destroy'])->name('kategori.destroy'); 
 
+    Route::get ('artikel' ,  [ArtikelController::class, 'index'])->name('artikel.index');
+    Route::get('artikel/create' , [ArtikelController::class,'create'])->name('artikel.create');
+    Route::post('artikel', [ArtikelController::class, 'store'])->name('artikel.store');
 });
 
 require __DIR__.'/auth.php';
