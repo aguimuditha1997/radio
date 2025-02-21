@@ -25,23 +25,18 @@ class ArtikelController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required|string|max:255',
-            'body' => 'required|string',
-            'kategori_id' => 'required|exists:kategori,id',
-            'status' => 'required|in:published,draft',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
+            'judul' => 'required|min:4',]);
 
-        Artikel::create([
-            'judul_artikel' => $request->judul_artikel,
-            'slug' => Str::slug($request->judul_artikel),
-            'body' => $request->body,
-            'kategori_id' => $request->kategori_id,
-            'status' => $request->status,
-            'gambar_artikel' => $request->gambar_artikel,
-            'user_id' => Auth::id(),
-        ]);
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->body);
+        $data['user_id'] = Auth::id();
+        $data['views'] = Auth::id();
+        $data['gambar_artikel'] = $request->file('gambar_artikel')->store('artikel');
 
+
+        dd($data);
+
+        Artikel::create($data);
         return redirect()->route('artikel.index')->with(['success'=>'Data Berhasil Tersimpan']);
     }
 
@@ -70,21 +65,25 @@ class ArtikelController extends Controller
             ]
 
         );
-
-        $artikel = Artikel::findOrFail($id);
+        
 
         $data=[
             'judul_artikel'=>$request->judul_artikel,
+            'slug'=> Str::slug($request->judul_artikel),
             'body'=>$request->body,
-            'nama_kategori'=>$request->nama_kategori,
+            'kategori_id'=>$request->kategori_id,
             'status'=>$request->status,
             'user_id' => Auth::id(),
+            'gambar_artikel' =>$request->file('gambar_artikel')->store('artikel', 'public'),
         ];
 
-        dd($data);
+        $artikel = Artikel::findOrFail($id);
 
+        
 
         $artikel->update($data);
+
+    
 
 
         return redirect()->route('artikel.index')->with('success', 'Data Berhasil Disimpan');

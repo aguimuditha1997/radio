@@ -30,10 +30,10 @@
                                 <x-textarea-trix value="{!! old('body' ,$artikel->body) !!}" id="x" name="body"></x-textarea-trix>
                                  </div>
                                 <div>
-                                    <x-input-label for="kategori" value="Kategori" />
-                                        <select type="text" name="kategori" class="mt-1 block w-full border border-gray-300 rounded-md" required>
+                                    <x-input-label for="kategori" value="Kategori_id" />
+                                        <select type="text" name="kategori_id" class="mt-1 block w-full border border-gray-300 rounded-md" required>
                                             @foreach($kategori as $row)
-                                            <option value={{$row->id}}=>{{$row->nama_kategori}}</option>
+                                            <option value={{$row->id}} ->{{$row->nama_kategori}}</option>
                                             @endforeach
                                         </select>
                                 </div>

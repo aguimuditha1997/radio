@@ -9,7 +9,7 @@ class Artikel extends Model
     protected $table = 'artikel';
 
     protected $fillable = [
-        'judul','slug','kategori_id','user_id','gambar_artikel','status','views','body'
+        'judul_artikel','slug','kategori_id','user_id','gambar_artikel','status','views','body'
     ];
 
     protected $hidden =[];
