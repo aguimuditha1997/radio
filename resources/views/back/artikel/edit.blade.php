@@ -37,6 +37,13 @@
                                             @endforeach
                                         </select>
                                 </div>
+
+                                @isset($artikel->gambar_artikel)
+
+                                    <img src="{{ asset('storage/' .$artikel->gambar_artikel) }}" class="rounded-md border-gray-300 max-w-40 p-2">
+
+                                @endisset
+
                                 <div>
                                     <x-input-label for="gambar_artikel" value="Gambar Thumbnil" />
                                     <input type="file" id="gambar_artikel" name="gambar_artikel" class="mt-1 w-full border border-gray-300 rounded-md" />

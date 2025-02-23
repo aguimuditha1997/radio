@@ -25,14 +25,14 @@
                                     <x-text-input id="judul_artikel" name="judul_artikel"  type="text" class="mt-1 block w-full" required />
                                 </div>
                                 <div>
-                                    <x-input-label for="body " value="Body" />
-                                    <trix-editor input="x" class="border-gray-300 focus:border-indigo-500 rounded-md shadow-sm min-h-80"></trix-editor>
+                                    <x-input-label for="body" value="Body" />
+                                    <x-textarea-trix value="hhhh" id="x" name="body"></x-textarea-trix>
                                 </div>
                                 <div>
                                     <x-input-label for="kategori" value="Kategori_id" />
                                         <select type="text" name="kategori_id" class="mt-1 block w-full border border-gray-300 rounded-md" required>
                                             @foreach($kategori as $row)
-                                            <option value={{$row->id}}=>{{$row->kategori_id}}</option>
+                                            <option value={{$row->id}}>{{$row->nama_kategori}}</option>
                                             @endforeach
                                         </select>
                                 </div>
